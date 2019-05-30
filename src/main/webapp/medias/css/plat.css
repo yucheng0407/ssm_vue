@@ -1,0 +1,412 @@
+html, body {
+    margin: 0;
+    overflow: hidden;
+}
+@media screen and (max-width: 1366px) {
+    .leftMenu,.logo {
+        width:200px !important;
+    }
+    .leftMenu ul li {
+        line-height: 50px !important;;
+        height: 50px !important;;
+    }
+}
+input,button{
+    text-align: center;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e2e2e2;
+}
+span {
+    vertical-align: middle;
+}
+
+i {
+    vertical-align: middle;
+}
+.logo {
+    font-family: cursive;
+    font-size: 25px;
+    color: white;
+    line-height: 50px;
+    height: 100%;
+    text-align: center;
+    float: left;
+    background: none;
+    width: 300px;
+    box-sizing: border-box;
+    border-right: 1px solid #cacaca40;
+}
+
+.top ul li {
+    line-height: 50px;
+    height: 50px;
+    float: left;
+    width: 100px;
+    position: relative;
+}
+
+.top ul li i {
+    font-size: 25px;
+}
+
+.top {
+    background: #2e86c1;
+    height: 50px;
+}
+
+.top .topselcet {
+    background: #296894;
+}
+
+.top ul li:hover:not(.topselcet):not(.topselcet1) {
+    background: #337aab;
+}
+
+.top ul li:hover .subMenus {
+    display: block;
+}
+
+.top ul {
+    float: right;
+    text-align: center;
+}
+
+.top ul li a {
+    height: 100%;
+    display: block;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.leftMenu ul li a {
+    display: block;
+    color: #ffffff;
+    font-size: 1.5em;
+    border-left: 4px solid rgba(255, 255, 255, 0);
+}
+
+.leftMenu ul li i {
+    font-size: 1.5em;
+}
+.leftMenu {
+    height: 100%;
+    width: 300px;
+    float: left;
+    background: #2f363e;
+    position: relative;
+}
+
+.leftMenu ul li {
+    line-height: 70px;
+    height: 70px;
+    text-align: center;
+    border-bottom: 1px solid #4e4e4e;
+}
+
+.leftMenu .topselcet1 {
+    background: #ed5250;
+    border-left: 4px solid #ffffff;
+    box-sizing: border-box;
+}
+.leftMenu ul li a:hover:not(.topselcet1) {
+    background: #414b56;
+    box-sizing: border-box;
+    border-left: 4px solid #009688;
+}
+.toggle {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    background: #cacaca;
+    line-height: 50px;
+}
+
+.toggle a {
+    display: block;
+    color: #000000
+}
+
+.subMenus ul li a {
+    display: block;
+    color: white;
+    font-size: 12px;
+    border-left: 4px solid rgba(255, 255, 255, 0);
+}
+
+.subMenus ul li i {
+    font-size: 20px;
+}
+
+.subMenus {
+    display: none;
+    background: #adadad;
+    width: 100%;
+    position: absolute;
+    z-index: 99999;
+}
+
+.subMenus ul li:hover {
+    background: #cacaca !important;
+}
+
+.subMenus ul li {
+    border-bottom: 1px solid #cccccc;
+    line-height: 40px;
+    height: 40px;
+}
+
+.subMenus .topselcet1 {
+    background: #ed5250;
+    border-left: 4px solid #ffffff;
+}
+
+#index {
+    height: 100%;
+}
+
+.rightBody {
+    height: 100%;
+    float: left;
+    position: relative;
+}
+
+.xx {
+    background-size: 5px;
+    background-image: url("../imges/ty.png");
+    background-repeat: no-repeat;
+    background-position-x: right;
+}
+
+table.gridtable {
+    font-family: verdana, arial, sans-serif;
+    font-size: 14px;
+    color: #666;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+table.gridtable thead th {
+    border: 1px solid #e6e6e6;
+    padding: 5px;
+    background-color: #f2f2f2;
+    height:28px;
+    line-height:28px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+table.gridtable tbody td {
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    padding: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+table.gridtable .checked {
+    border-color: #1E9FFF !important;
+    background-color: #1E9FFF !important;
+}
+table.gridtable .checked:before {
+    color: white;
+    content: "\e750";
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+table.gridtable .check:hover{
+    border-color: #1E9FFF;
+}
+table.gridtable .check{
+    right: auto;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    line-height: 16px;
+    border: 1px solid #d2d2d2;
+    font-size: 12px;
+    border-radius: 2px;
+    background-color: #fff;
+    -webkit-transition: .1s linear;
+    transition: .1s linear;
+    display: inline-block;
+}
+table.gridtable tbody tr {
+    background-color: #ffffff;
+    height:28px;
+    line-height:28px;
+}
+
+table.gridtable tbody tr:hover:not(.select) {
+    background-color: #f2f2f2;
+}
+
+table.gridtable tbody .select {
+    background-color: #66bdff;
+    color: white;
+}
+/*排序*/
+.sort {
+    position: relative;
+    width: 10px;
+    height: 20px;
+    margin-left: 5px;
+    cursor: pointer !important;
+}
+.sort .sort-desc:hover {
+    border-top-color: #666;
+}
+.sort .sort-asc:hover {
+    border-bottom-color: #666;
+}
+.sort .sort-desced {
+    border-top-color: #666 !important;;
+}
+.sort .sort-asced {
+    border-bottom-color: #666 !important;
+}
+.sort .sort-desc {
+    bottom: 2px;
+    border-bottom: none;
+    border-top-style: solid;
+    border-top-color: #b2b2b2;
+}
+.sort .sort-asc {
+    top: 3px;
+    border-top: none;
+    border-bottom-style: solid;
+    border-bottom-color: #b2b2b2;
+}
+.sort .sort-edge {
+    position: absolute;
+    left: 5px;
+    border-width: 5px;
+}
+.sort-edge {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: dashed;
+    border-color: transparent;
+    overflow: hidden;
+}
+.button:hover{
+    background: #0079c3;
+}
+.button {
+    float: left;
+    border-color: #2e85c1;
+    width: auto;
+    height: 38px;
+    color: #fff;
+    background: #2e85c1;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 10px 10px;
+    padding: 0 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.button.danger {
+    border-color:#d9534f;
+    background: #d9534f;
+}
+.button.danger:hover{
+    background: #d94846 !important;
+}
+.button.warning:hover{
+    background: #ff9298 !important;
+}
+.button.success:hover{
+    background: red !important;
+}
+.button.success {
+    border-color:#5cb85c;
+    background: #5cb85c;
+}
+.button.warning {
+    border: 1px solid #f0ad4e;
+    background: #f0ad4e;
+}
+div.page {
+    padding: 3px;
+    margin: 3px;
+    float: right;
+    background: white;
+    font-size: 13px;
+}
+div.page .skip{
+    font-size: 13px;
+    margin-left: 6px;
+    vertical-align: unset;
+    color: #999;
+}
+div.page .skip input,button{
+    margin: 0 9px;
+    height: 27px;
+    width: 34px;
+    font-size: 13px;
+}
+div.page .skip  button{
+    cursor: pointer;
+}
+div.page .skip input:focus{
+    border: 1px solid #0079c3;
+}
+div.page a {
+    /*display: block;*/
+    /*float: left;*/
+    font-size: 13px;
+    border: #aaaadd 1px solid;
+    padding: 2px 8px 2px 8px;
+    margin: 2px;
+    color: #000000;
+    text-decoration: none;
+    background: #fff;
+
+}
+
+div.page a:hover {
+    border: #0079c3 1px solid;
+}
+
+div.page a.current {
+    border: #0079c3 1px solid;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0079c3
+}
+
+div.page a.disabled {
+    border: #eee 1px solid;
+    color: #ddd;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+{
+    opacity: 0;
+}
+
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active for below version 2.1.8 */
+{
+    transform: translateX(10px);
+    opacity: 0;
+}

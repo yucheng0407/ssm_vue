@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="medias/css/Global.css"/>
+    <link rel="stylesheet" type="text/css" href="medias/css/plat.css"/>
+    <link rel="stylesheet" type="text/css" href="medias/css/iconFont/iconfont.css"/>
+    <script type="text/javascript" src="medias/js/baseJs/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="medias/js/baseJs/vue.js"></script>
+    <script type="text/javascript" src="medias/js/baseJs/componentVue.js"></script>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background: #fff;
+
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 50px">
+    <template id="baseTable">
+        <div :pagenum="page.pageNum=(Math.ceil(tableData.length / tableSetting.limit))" :pageLength="page.pageLength=tableData.length">
+            <component is="baseButton" :buttons="tableSetting.buttons"></component>
+            <table class="gridtable" style="width: 100%">
+                <colgroup>
+                    <col v-for="config in tableConfig" :width="config.width"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th><input type="checkbox" style="display: none" /><i for="checkbox" class="check" :class="{checked:isAllChecked}" title="全选" @click="allChecked"></i></th>
+                    <th v-for="config in tableConfig">{{config.name}}<span v-if="config.isSort" class="sort"><i
+                            class="sort-edge sort-asc"  :class="sortType" title="升序" @click="asc(config.type)"></i><i
+                            class="sort-edge sort-desc" :class="sortType" title="降序" @click="desc(config.type)"></i></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr @dblclick="dblclick(data)" @click="click(data)"
+                    v-for="data in tableSetting.limit?tableData.slice((page.index-1)*tableSetting.limit,page.index*tableSetting.limit):tableData">
+                    <td><input type="checkbox" style="display: none"/><i for="checkbox" class="check"
+                                                                         :class="{checked:data._sel}"></i></td>
+                    <td v-for="config in tableConfig">{{data[config.type]}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <component v-if="tableSetting.limit" is="basePage" :page="page"></component>
+        </div>
+    </template>
+    <template id="baseButton">
+        <div style="float: left"><button v-for="button in buttons" class="button" @click="button.onClick" :class="button.type"><i
+                style="font-size: 20px" v-if="button.icon" class="iconfont" v-html="button.icon"></i><span>{{button.name}}</span></button>
+        </div>
+    </template>
+    <div id="page">
+        <component ref="table" is="baseTable" :table-config="tableConfig" :table-data="tableData"
+                   :table-setting="tableSetting"></component>
+    </div>
+</div>
+<script>
+    Vue.component("baseButton", {
+        props: ['buttons'],
+        template: '#baseButton'
+    })
+    /**
+     * 翻页组件
+     * page:{当前页 index:Number,页数 pageNum:Number}
+     */
+    Vue.component("baseTable", {
+        props: ['tableData', 'tableConfig', 'tableSetting'],
+        template: '#baseTable',
+        data: function () {
+            return {sortType:null,isAllChecked:false,page: {index: 1, pageLength:this.tableData.length,pageNum: (Math.ceil(this.tableData.length / this.tableSetting.limit))}}
+        },
+        methods: {
+            allChecked:function () {
+                this.isAllChecked=!this.isAllChecked;
+                for (var i = this.tableData.length - 1; i >= 0; i--) {
+                   this.isAllChecked?Vue.set(this.tableData[i], '_sel', true):Vue.set(this.tableData[i], '_sel', false);
+                }
+            },
+            asc: function (type) {
+                this.tableData.sort(function (a, b) { return a[type]-b[type] })
+                this.page.index=1;
+                this.sortType="sort-asced";
+            },
+            desc: function (type) {
+                this.tableData.sort(function (a, b) { return b[type]-a[type] })
+                this.page.index=1;
+                this.sortType="sort-desced";
+            },
+            delSel: function () {
+                for (var i = this.tableData.length - 1; i >= 0; i--) {
+                    if (this.tableData[i]._sel) {
+                        this.tableData.splice(i, 1);
+                    }
+                }
+            },
+            getSel: function () {
+                return this.tableData.filter(function (d) {
+                    return d._sel;
+                })
+            },
+            dblclick: function (data) {
+                debugger
+            },
+            click: function (data) {
+                if (data._sel) {//
+                    Vue.set(data, '_sel', false);
+                    this.isAllChecked=false;
+                    //   data._sel=null;
+                } else {
+                    Vue.set(data, '_sel', true);
+                    //      data._sel=true;
+                }
+            }
+        }
+    });
+    var list = [];
+    for (var i = 0; i < 10; i++) {
+        list.push({a: i + 1, b: 2, c: '3dasdsadsaasdsadsadsadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', d: 4})
+    }
+    var i=50;
+    var vue = new Vue({
+        el: "#page",
+        data: {
+            tableSetting: {
+                limit: 8, buttons: [{
+                    name: "新增", icon: "&#xe6e2;", onClick: function () {
+                        vue.$refs.table.getSel();
+
+                        list.push({a: i=++i, b: 2, c: 3, d: 4})
+                        debugger
+                    }
+                }, {
+                    name: "删除", type: "danger", icon: "&#xe70a;", onClick: function () {
+                        vue.$refs.table.delSel()
+                    }
+                }]
+            },
+            tableData: list,
+            tableConfig: [{name: 1111, type: 'a', width: '50', isSort: true}, {name: 222, type: 'b'}, {
+                name: 3,
+                type: 'c'
+            }, {
+                name: 4,
+                type: 'd'
+            }]
+        }
+    })
+</script>
+
+</body>
+</html>
